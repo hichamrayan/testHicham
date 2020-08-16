@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<!-- ========== Left Sidebar Start ========== -->
+	<div class="vertical-menu" layout:fragment="sidebar">
+
+		<div class="h-100">
+
+			<div class="user-wid text-center py-4">
+				<div class="user-img">
+					<img th:src="@{/assets/images/users/avatar-2.jpg}" alt=""
+						class="avatar-md mx-auto rounded-circle">
+				</div>
+
+				<div class="mt-3">
+
+					<a href="#" class="text-dark font-weight-medium font-size-16">Patrick
+						Becker</a>
+					<p class="text-body mt-1 mb-0 font-size-13">UI/UX Designer</p>
+
+				</div>
+			</div>
+
+			<!--- Sidemenu -->
+			<div id="sidebar-menu">
+				<!-- Left Menu Start -->
+				<ul class="metismenu list-unstyled" id="side-menu">
+					<li class="menu-title">Menu</li>
+
+					<li><a href="javascript: void(0);" class="waves-effect"> <i
+							class="mdi mdi-airplay"></i><span
+							class="badge badge-pill badge-info float-right">2</span> <span>Accueil</span>
+					</a>
+						<ul class="sub-menu" aria-expanded="false">
+							<li><a href="index.html">Dashboard 1</a></li>
+							<li><a href="index-2.html">Dashboard 2</a></li>
+						</ul></li>
+
+					<li><a href="javascript: void(0);"
+						class="has-arrow waves-effect"> <i class="fas fa-file"></i> <span>Files</span>
+					</a>
+						<ul class="sub-menu" aria-expanded="false">
+							<li><a th:href="@{/files}">List files</a></li>
+							<li><a th:href="@{/files/upload}">Upload files</a></li>
+						</ul></li>
+
+
+
+					<li class="menu-title">Administration</li>
+
+					<li><a href="javascript: void(0);"
+						class="has-arrow waves-effect"> <i class="fas fa-user-friends"></i> <span>Administration</span>
+					</a>
+						<ul class="sub-menu" aria-expanded="false">
+							<li><a th:href="@{/admin/users}"><i class="fas fa-user"></i>Utilisateurs</a></li>
+							<li><a th:href="@{/admin/roles}"><i class="fas fa-user-lock"></i>Roles</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!-- Sidebar -->
+		</div>
+	</div>
+	<!-- Left Sidebar End -->
+</body>
+</html>

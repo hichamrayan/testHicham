@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div class="main-content" layout:fragment="main_content">
+		<div class="page-content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div
+						class="page-title-box d-flex align-items-center justify-content-between">
+						<h4 class="page-title mb-0 font-size-18">Form File Upload</h4>
+
+						<div class="page-title-right">
+							<ol class="breadcrumb m-0">
+								<li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+								<li class="breadcrumb-item active">Form File Upload</li>
+							</ol>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+
+							<div>
+								<form method="POST" enctype="multipart/form-data" th:object="${fileRecord}"
+									th:action="@{/files/upload}">
+									
+									<div class="form-group row">
+										<label
+											class="col-4" for="file">Choose
+											file</label>
+										<input type="file" class="col-8" id="file" name="file"> 
+									</div>
+									<div class="form-group row">
+										<label
+											class="col-4" for="filename">Filename</label>
+										<input type="text" class="col-8"
+											th:field="*{filename}"> 
+									</div>
+									<div class="form-group row custom-control custom-switch">
+										<label
+											class="col-4" for="hidden">Hidden</label>
+										<input type="checkbox" th:field="*{hidden}"> 
+									</div>
+									<div class="form-group row">
+										<label for="description" class="col-4 col-form-label">Description</label>
+										<div class="col-8">
+											<textarea th:field="*{description}" rows="4"
+												class="form-control"></textarea>
+										</div>
+									</div>
+
+									<div class="text-center mt-4">
+										<button type="submit"
+											class="btn btn-primary waves-effect waves-light">Send
+											Files</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Page-content -->
+
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-6">
+						<script>document.write(new Date().getFullYear())</script>
+						© Qovex.
+					</div>
+					<div class="col-sm-6">
+						<div class="text-sm-right d-none d-sm-block">Design &
+							Develop by Themesbrand</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- end main content-->
+</body>
+
+</html>
