@@ -8,7 +8,12 @@ public class RootController {
 	
 	@GetMapping("/")
 	String getRootPage() {
-		return "hello";
+		return "home";
+	}
+	
+	@GetMapping("/login")
+	String getLoginPage() {
+		return "login";
 	}
 	
 }
