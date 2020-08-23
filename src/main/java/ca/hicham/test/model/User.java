@@ -1,12 +1,15 @@
 package ca.hicham.test.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -19,7 +22,9 @@ public class User {
     private String username;
  
     private String password;
-    @ManyToMany
+   
+    
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
 	public List<Role> getRoles() {
@@ -53,7 +58,9 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
- 
-    
-    
+
+	@Override
+	public String toString() {
+		return "User :"+username;
+	}
 }

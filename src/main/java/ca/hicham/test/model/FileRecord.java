@@ -2,11 +2,15 @@ package ca.hicham.test.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FileRecord {
+	 @Id
+	 @GeneratedValue
 	private long id;
 	 private String filename;
 	 private long size;
@@ -14,9 +18,10 @@ public class FileRecord {
 	 private String description;
 	 private Date load_date;
 	 private Date mod_date;
+	 
+	 @ManyToOne(fetch = FetchType.EAGER)
+	 private User user;
 	
-	 @Id
-	 @GeneratedValue
  public long getId() {
 		return id;
 	}
@@ -63,5 +68,11 @@ public class FileRecord {
 	public String toString() {
 		return "FileRecord [id=" + id + ", filename=" + filename + ", size=" + size + ", hidden=" + hidden
 				+ ", description=" + description + ", load_date=" + load_date + ", mod_date=" + mod_date + "]";
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

@@ -187,7 +187,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							aria-haspopup="true" aria-expanded="false">
 							<img class="rounded-circle header-profile-user"
 								th:src="@{/assets/images/users/avatar-2.jpg}" alt="Header Avatar">
-							<span class="d-none d-xl-inline-block ml-1">Patrick</span> <i
+							<span class="d-none d-xl-inline-block ml-1" sec:authentication="name"></span> <i
 								class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
 						</button>
 						<div class="dropdown-menu dropdown-menu-right">
@@ -203,7 +203,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 								class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Lock
 								screen</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item text-danger" href="#"><i
+							<a class="dropdown-item text-danger" th:href="@{/logout}"><i
 								class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>
 								Logout</a>
 						</div>

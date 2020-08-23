@@ -3,6 +3,7 @@ package ca.hicham.test.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -13,7 +14,8 @@ public class Role {
     @GeneratedValue
     private Long id;
     private String name;
-    @ManyToMany
+    
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Privilege> privileges;
 	public Long getId() {
 		return id;

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ca.hicham.test.dao.FileRecordRepository;
 import ca.hicham.test.model.FileRecord;
+import ca.hicham.test.model.User;
 
 @Service
 public class FileRecordService {
@@ -22,13 +23,14 @@ public class FileRecordService {
 	StorageService storageService;
 	
 	
-	public boolean saveFileRecord(FileRecord fileRecord, MultipartFile file) {
+	public boolean saveFileRecord(FileRecord fileRecord, MultipartFile file, User user) {
 		
 		storageService.storeFile(fileRecord.getFilename(), file);
 		
 		fileRecord.setSize(file.getSize());
 		fileRecord.setLoad_date(new Date());
 		fileRecord.setMod_date(new Date());
+		fileRecord.setUser(user);
 		
 		repo.save(fileRecord);
 		return true;

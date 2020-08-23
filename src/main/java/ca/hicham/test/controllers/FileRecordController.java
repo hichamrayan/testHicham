@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ca.hicham.test.forms.Alert;
 import ca.hicham.test.model.FileRecord;
+import ca.hicham.test.model.User;
+import ca.hicham.test.security.AuthenticationFacade;
 import ca.hicham.test.service.FileRecordService;
 
 @Controller
@@ -28,6 +32,7 @@ public class FileRecordController {
 	@Autowired
 	FileRecordService fileRecordService;
 	
+	@PreAuthorize("hasPermission('files', 'list')")
 	@GetMapping("/files")
 	String listFileRecords(Model model){
 		model.addAttribute("files",fileRecordService.ListFileRecords());
@@ -39,14 +44,16 @@ public class FileRecordController {
 		return "files/upload";
 	}
 	@PostMapping("/files/upload")
-	String uploadFileRecord(@RequestParam MultipartFile file, @ModelAttribute FileRecord fileRecord,RedirectAttributes redirectAttributes){
-		
-		 if(fileRecordService.saveFileRecord(fileRecord, file)) {
+	String uploadFileRecord(AuthenticationFacade authenticationFacade,@RequestParam MultipartFile file, @ModelAttribute FileRecord fileRecord,RedirectAttributes redirectAttributes){
+		logger.info("user="+authenticationFacade.getCurrentUser().get());
+		 if(fileRecordService.saveFileRecord(fileRecord, file,authenticationFacade.getCurrentUser().get())) {
 			 redirectAttributes.addFlashAttribute("msg", new Alert("success","upload OK"));
 			 return "redirect:/files";
 		 }
 		 return "files/upload"; // Envoyer un flash
 	}
+	
+	@PreAuthorize("hasPermission(#id, 'delete')")
 	@GetMapping("/files/delete/{id}")
 	String deleteFileRecord(@PathVariable long id,RedirectAttributes redirectAttributes) throws IOException{
 		fileRecordService.deleteFileRecord(id);
